@@ -22,22 +22,40 @@ func mergeIntervals(intervals []Interval) []Interval {
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i].Start < intervals[j].Start
 	})
-	fmt.Println(intervals)
-	return intervals
+
+	// result is the first interval in the list
+	result := make([]Interval, 0, len(intervals))
+
+	for i := 0; i < len(intervals)-1; i++ {
+		current := intervals[i]
+		compareIntervall := intervals[i+1]
+
+		//
+		if current.End > compareIntervall.Start {
+			// if current
+			// check which end value is greater than
+			// and set it in intersection
+
+			result = append(result, intervals[i])
+
+		} else {
+			// Keine Überlappung, füge das aktuelle Intervall hinzu
+			result = append(result, intervals[i])
+		}
+	}
+	return result
 
 }
 
 func main() {
 	intervals := []Interval{
-		{1, 5},
-		{2, 8},
-		{6, 9},
-		{10, 15},
-		{13, 18},
-		{20, 40},
+		{25, 30},
+		{2, 19},
+		{14, 23},
+		{4, 8},
 	}
 
 	overlappingIntervals := mergeIntervals(intervals)
 
-	fmt.Println(overlappingIntervals)
+	fmt.Println("OverlappingIntervalls:", overlappingIntervals)
 }
