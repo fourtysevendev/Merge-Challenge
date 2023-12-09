@@ -11,6 +11,13 @@ type Interval struct {
 	End   int
 }
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 func mergeIntervals(intervals []Interval) []Interval {
 	// if the list of intervals is empty or has length 1
 	// then return the list of intervals
@@ -24,25 +31,25 @@ func mergeIntervals(intervals []Interval) []Interval {
 	})
 
 	// result is the first interval in the list
+	fittingInterval := Interval{Start: intervals[0].Start, End: intervals[0].End}
 	result := make([]Interval, 0, len(intervals))
 
-	for i := 0; i < len(intervals)-1; i++ {
-		current := intervals[i]
-		compareIntervall := intervals[i+1]
+	for i := 1; i < len(intervals); i++ {
+		//compareInterval := &result[len(result)-1]
 
 		//
-		if current.End > compareIntervall.Start {
+		if fittingInterval.End > intervals[i].End && fittingInterval.Start < intervals[i].End {
 			// if current
 			// check which end value is greater than
 			// and set it in intersection
-
-			result = append(result, intervals[i])
+			fittingInterval = Interval{Start: fittingInterval.Start, End: max(fittingInterval.End, intervals[i].End)}
 
 		} else {
-			// Keine Überlappung, füge das aktuelle Intervall hinzu
+			// No overlap, add the current interval
 			result = append(result, intervals[i])
 		}
 	}
+	result = append(result, fittingInterval)
 	return result
 
 }
