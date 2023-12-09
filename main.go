@@ -11,13 +11,16 @@ type Interval struct {
 	End   int
 }
 
-func max(a, b int) int {
+// greatestPointOf return greates endpoint
+func greatestPointOf(a, b int) int {
 	if a > b {
 		return a
 	}
 	return b
 }
 
+// mergeInterval merges intervals
+// like blocks that are plugged into each other
 func mergeIntervals(intervals []Interval) []Interval {
 	// if the list of intervals is empty or has length 1
 	// then return the list of intervals
@@ -37,17 +40,17 @@ func mergeIntervals(intervals []Interval) []Interval {
 	for i := 1; i < len(intervals); i++ {
 		//compareInterval := &result[len(result)-1]
 
-		//
-		if fittingInterval.End > intervals[i].End && fittingInterval.Start < intervals[i].End {
-			// if current
-			// check which end value is greater than
-			// and set it in intersection
-			fittingInterval = Interval{Start: fittingInterval.Start, End: max(fittingInterval.End, intervals[i].End)}
-
-		} else {
-			// No overlap, add the current interval
+		// if start from currnt interval is greater than end
+		// from merged interval then the intervals do not overlapped
+		// if they no overlapped then append the current interval to result
+		if fittingInterval.End < intervals[i].Start {
 			result = append(result, intervals[i])
+			break
 		}
+		// if they overlap then merge the intervals
+		// that means the merged interval has the smallest start point
+		// and the biggest end point
+		fittingInterval = Interval{Start: fittingInterval.Start, End: greatestPointOf(fittingInterval.End, intervals[i].End)}
 	}
 	result = append(result, fittingInterval)
 	return result
