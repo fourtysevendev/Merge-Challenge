@@ -1,6 +1,7 @@
 package merge
 
 import (
+	"fmt"
 	"sort"
 )
 
@@ -18,6 +19,13 @@ func greatestPointOf(a, b int) int {
 	return b
 }
 
+func checkValidInterval(interval Interval) bool {
+	if interval.Start > interval.End {
+		return false
+	}
+	return true
+}
+
 // mergeInterval merges intervals
 // like blocks that are plugged into each other
 func Merge(intervals []Interval) []Interval {
@@ -32,19 +40,36 @@ func Merge(intervals []Interval) []Interval {
 		return intervals[i].Start < intervals[j].Start
 	})
 
+	// set the first valid interval for fittingInterval
+	// to merge the other intervals on it
+	var fittingInterval Interval
+	for i := 0; i < len(intervals); i++ {
+		if !checkValidInterval(intervals[i]) {
+			fmt.Println("Invalid interval, because start is greater than end")
+			continue
+		}
+		fittingInterval = Interval{Start: intervals[i].Start, End: intervals[i].End}
+		break
+	}
+
 	// result is the first interval in the list
-	fittingInterval := Interval{Start: intervals[0].Start, End: intervals[0].End}
+	//fittingInterval := Interval{Start: intervals[0].Start, End: intervals[0].End}
 	result := make([]Interval, 0, len(intervals))
 
 	for i := 1; i < len(intervals); i++ {
-		//compareInterval := &result[len(result)-1]
+
+		// check if the interval is valid
+		if !checkValidInterval(intervals[i]) {
+			fmt.Println("Invalid interval, because start is greater than end")
+			continue
+		}
 
 		// if start from currnt interval is greater than end
 		// from merged interval then the intervals do not overlapped
 		// if they no overlapped then append the current interval to result
 		if fittingInterval.End < intervals[i].Start {
 			result = append(result, intervals[i])
-			break
+			continue
 		}
 		// if they overlap then merge the intervals
 		// that means the merged interval has the smallest start point

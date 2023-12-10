@@ -1,5 +1,7 @@
 FROM scratch
 
+WORKDIR /app
 COPY main main
+USER 1000:1000
 
-ENTRYPOINT [ "./main" ]
+ENTRYPOINT [ "/app/main" ]
