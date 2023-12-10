@@ -11,13 +11,13 @@ func main() {
 
 	intervalInput := os.Getenv("INTERVALS")
 	if intervalInput == "" {
-		fmt.Println("Die Umgebungsvariable INTERVALS ist nicht gesetzt.")
+		fmt.Println("Intervals must not be empty")
 		return
 	}
 
 	intervals, err := merge.ParseInterval(intervalInput)
 	if err != nil {
-		fmt.Printf("Fehler beim Parsen der Intervalle: %v\n", err)
+		fmt.Printf("Failure while parsing Intervals: %v\n", err)
 		return
 	}
 

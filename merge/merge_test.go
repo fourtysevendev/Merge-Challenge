@@ -1,25 +1,10 @@
 package merge
 
 import (
-	"math/rand"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 )
-
-func generateRandomIntervals(count, maxLength int) []Interval {
-
-	var intervals []Interval
-
-	for i := 0; i < count; i++ {
-		start := rand.Intn(maxLength)
-		end := start + rand.Intn(maxLength-start) + 1
-
-		intervals = append(intervals, Interval{Start: start, End: end})
-	}
-
-	return intervals
-}
 
 func Test_Merge(t *testing.T) {
 	//randomIntervals := generateRandomIntervals(10, 100)
