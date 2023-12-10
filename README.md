@@ -14,11 +14,11 @@ Compile the program
 
 `go build main.go`
 
-and run the Binary `./main` 
+and run the Binary `INTERVALS="[25,30] [2,19] [14,23] [4,8]" ./main` 
 
 or 
 
-`go run main.go`
+`INTERVALS="[25,30] [2,19] [14,23] [4,8]" go run main.go`
 
 and with Docker:
 
