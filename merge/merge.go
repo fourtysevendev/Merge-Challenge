@@ -41,7 +41,7 @@ func findSmallestIntervals(intervals []Interval) (smallestInterval Interval, sor
 			return smallestInterval, intervals
 		}
 	}
-	return smallestInterval, intervals
+	return smallestInterval, nil
 }
 
 func checkInterval(interval Interval) bool {
@@ -61,6 +61,9 @@ func Merge(intervals []Interval) []Interval {
 	}
 
 	fittingInterval, sortedIntervals := findSmallestIntervals(intervals)
+	if sortedIntervals == nil {
+		return nil
+	}
 
 	// result is the first interval in the list
 	//fittingInterval := Interval{Start: intervals[0].Start, End: intervals[0].End}
@@ -74,7 +77,7 @@ func Merge(intervals []Interval) []Interval {
 			continue
 		}
 
-		// if start from currnt interval is greater than end
+		// if start from current interval is greater than end
 		// from merged interval then the intervals do not overlapped
 		// if they no overlapped then append the current interval to result
 		if fittingInterval.End < sortedIntervals[i].Start {
