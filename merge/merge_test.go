@@ -32,3 +32,30 @@ func Test_Merge(t *testing.T) {
 		})
 	}
 }
+
+func Test_findSmallestIntervals(t *testing.T) {
+	tests := []struct {
+		name                     string
+		actual                   []Interval
+		expectedSmallestInterval Interval
+		expectedSortedIntervals  []Interval
+	}{
+		{
+			name:                     "successful find smallest Interval",
+			actual:                   []Interval{{1, 10}, {1, 30}, {23, 87}, {3, 9}, {0, -1}, {33, -2}},
+			expectedSmallestInterval: Interval{Start: 1, End: 30},
+			expectedSortedIntervals:  []Interval{{1, 10}, {1, 30}, {3, 9}, {23, 87}, {0, -1}, {33, -2}},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			actualSmallestInterval, actualSortIntervals := findSmallestIntervals(test.actual)
+			if !cmp.Equal(actualSmallestInterval, test.expectedSmallestInterval) {
+				t.Errorf(" smallestInterval : expected %v, got %v", test.expectedSmallestInterval, actualSmallestInterval)
+			}
+			if !cmp.Equal(actualSortIntervals, test.expectedSortedIntervals) {
+				t.Errorf(" sortedIntervals : expected %v, got %v", test.expectedSortedIntervals, actualSortIntervals)
+			}
+		})
+	}
+}

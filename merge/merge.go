@@ -20,10 +20,13 @@ func greatestPointOf(a, b int) int {
 }
 
 // findSmallestIntervals find the smallest Interval of the list
-// and returns an ascending list of intervals
+// And returns an ascending list of intervals
 func findSmallestIntervals(intervals []Interval) (smallestInterval Interval, sortIntervals []Interval) {
 	sort.Slice(intervals, func(i, j int) bool {
-		return intervals[i].Start < intervals[j].Start
+		if checkInterval(intervals[i]) && checkInterval(intervals[j]) {
+			return intervals[i].Start < intervals[j].Start
+		}
+		return false
 	})
 	for i := 0; i < len(intervals); i++ {
 		if i == len(intervals)-1 {
@@ -44,6 +47,8 @@ func findSmallestIntervals(intervals []Interval) (smallestInterval Interval, sor
 	return smallestInterval, nil
 }
 
+// checkInterval checks if the interval is valid
+// means the intervall must be a ≤ x ≤ b
 func checkInterval(interval Interval) bool {
 	if interval.Start > interval.End {
 		return false
