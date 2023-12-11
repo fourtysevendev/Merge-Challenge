@@ -19,9 +19,8 @@ func Test_Merge(t *testing.T) {
 	}, {
 		name:             "Incompatible Intervals",
 		inputInterval:    []Interval{{2, 1}, {30, 0}, {4, -8}, {35, 7}},
-		expectedInterval: []Interval{{0, 0}},
-	},
-	}
+		expectedInterval: nil,
+	}}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
