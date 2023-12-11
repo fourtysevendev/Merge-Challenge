@@ -6,6 +6,8 @@ merge-challenge is a programming task where you have to implement a function tha
 
 `INTERVALS` : `string` for example: `[25,30] [2,19] [14,23] [4,8]`
 
+**Important to know an interval must be  *a ≤ x ≤ b* and the pattern shows like *\`\[\d+,\d+\]\`* (without whitespaces)**
+
 ### Run and Build
 
 you can start the program as docker as a scratch image or compile directly via go.
