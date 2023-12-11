@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/code_challenge/merge"
 )
 
 func main() {
-
+	startTime := time.Now()
 	intervalInput := os.Getenv("INTERVALS")
 	if intervalInput == "" {
 		fmt.Println("Intervals must not be empty")
@@ -22,6 +23,8 @@ func main() {
 	}
 
 	overlappingIntervals := merge.Merge(intervals)
-
+	endTime := time.Now()
+	diffTime := endTime.Sub(startTime)
+	fmt.Println("Runtime: ", diffTime)
 	fmt.Println("OverlappingIntervalls:", overlappingIntervals)
 }
