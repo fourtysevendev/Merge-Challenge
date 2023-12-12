@@ -30,7 +30,7 @@ func Test_ParseInterval(t *testing.T) {
 		{
 			name:     "Failure while parsing interval",
 			input:    "[1,,10] [2] [3,30]",
-			wantErr:  errors.New("inavlid Interval: [1,,10]"),
+			wantErr:  errors.New("inavlid Interval: 1,,10"),
 			expected: nil,
 		},
 	}

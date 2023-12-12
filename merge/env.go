@@ -10,9 +10,17 @@ import (
 func ParseInterval(input string) ([]Interval, error) {
 	var intervals []Interval
 
-	pairs := strings.Split(input, " ")
+	splitInterval := strings.ReplaceAll(input, " ", "")
+	pairs := strings.Split(splitInterval, "][")
+
+	if len(pairs) > 0 {
+		pairs[0] = strings.TrimLeft(pairs[0], "[")
+	}
+	if len(pairs) > 1 {
+		pairs[len(pairs)-1] = strings.TrimRight(pairs[len(pairs)-1], "]")
+	}
 	for _, pair := range pairs {
-		limits := strings.Split(strings.Trim(pair, "[]"), ",")
+		limits := strings.Split(pair, ",")
 		if len(limits) != 2 {
 			return nil, fmt.Errorf("inavlid Interval: %s", pair)
 		}
