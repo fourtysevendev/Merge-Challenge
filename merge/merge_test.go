@@ -7,7 +7,6 @@ import (
 )
 
 func Test_Merge(t *testing.T) {
-	//randomIntervals := generateRandomIntervals(10, 100)
 	tests := []struct {
 		name             string
 		inputInterval    []Interval
