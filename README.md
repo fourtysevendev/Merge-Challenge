@@ -24,7 +24,11 @@ or
 
 and with Docker:
 
-`docker build -t mergeIntervals --build-arg INTERVALS="[25,30] [2,19] [14,23] [4,8]" .`
+**first you need to compile on amd64**
+
+`GOOS=linux GOARCH=amd64 go build main.go`
+
+`docker build -t mergeIntervals --build-arg INTERVALS="[25,30] [2,19] [14,23] [4,8]" . && docker run mergeIntervals`
 
 ### Program Runtime
 
