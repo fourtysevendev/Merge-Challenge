@@ -15,10 +15,9 @@ func ParseInterval(input string) ([]Interval, error) {
 
 	if len(pairs) > 0 {
 		pairs[0] = strings.TrimLeft(pairs[0], "[")
-	}
-	if len(pairs) > 1 {
 		pairs[len(pairs)-1] = strings.TrimRight(pairs[len(pairs)-1], "]")
 	}
+
 	for _, pair := range pairs {
 		limits := strings.Split(pair, ",")
 		if len(limits) != 2 {
